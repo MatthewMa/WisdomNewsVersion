@@ -2,6 +2,10 @@ package com.example.sihua.wisdomnews;
 
 import android.animation.AnimatorSet;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ViewUtils;
@@ -27,12 +31,29 @@ public class SplashActivity extends Activity {
     private Button btn_start;
     @ViewInject(R.id.rl_root)
     private RelativeLayout rl_root;
+
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            enterHome();
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
+        initListener();
 
+    }
 
+    private void initListener() {
+        btn_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handler.removeCallbacksAndMessages(null);
+                enterHome();
+            }
+        });
     }
 
     private void initView() {
@@ -71,5 +92,12 @@ public class SplashActivity extends Activity {
                 });
             }
         }, 2000);
+        handler.sendEmptyMessageDelayed(0,7000);
+
+    }
+
+    private void enterHome() {
+        startActivity(new Intent(this,GuideActivity.class));
+        finish();
     }
 }
