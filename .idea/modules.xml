@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/SlidingMenuLibarary/SlidingMenuLibarary.iml" filepath="$PROJECT_DIR$/SlidingMenuLibarary/SlidingMenuLibarary.iml" />
       <module fileurl="file://$PROJECT_DIR$/WisdomNews.iml" filepath="$PROJECT_DIR$/WisdomNews.iml" />
       <module fileurl="file://$PROJECT_DIR$/WisdowmNewsClient/WisdowmNewsClient.iml" filepath="$PROJECT_DIR$/WisdowmNewsClient/WisdowmNewsClient.iml" />
     </modules>

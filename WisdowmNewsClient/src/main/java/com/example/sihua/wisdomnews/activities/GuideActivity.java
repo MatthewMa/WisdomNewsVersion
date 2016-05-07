@@ -1,7 +1,8 @@
-package com.example.sihua.wisdomnews;
+package com.example.sihua.wisdomnews.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.print.PageRange;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.example.sihua.wisdomnews.Constants.Constants;
+import com.example.sihua.wisdomnews.R;
+import com.example.sihua.wisdomnews.utils.SharedPreferenceUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -36,7 +40,6 @@ public class GuideActivity extends Activity {
     private int[] images=new int[]{R.mipmap.guide_1,R.mipmap.guide_2,R.mipmap.guide_3};
     List<ImageView> imagelist;
     private int distance;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,16 @@ public class GuideActivity extends Activity {
 
     private void initListener() {
         vp_content.setOnPageChangeListener(new MyPageChangeListener());
+        btn_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //走完引导页面，跳转主页面
+                SharedPreferenceUtils.addSharedPreferenceBoolean(GuideActivity.this, Constants
+                        .boolInfo,true);
+                startActivity(new Intent(GuideActivity.this, HomeActivity.class));
+                finish();
+            }
+        });
     }
 
     private void initView() {

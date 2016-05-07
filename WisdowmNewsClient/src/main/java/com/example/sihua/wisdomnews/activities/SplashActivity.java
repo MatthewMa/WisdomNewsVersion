@@ -1,14 +1,10 @@
-package com.example.sihua.wisdomnews;
+package com.example.sihua.wisdomnews.activities;
 
-import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.speech.tts.TextToSpeech;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ViewUtils;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -19,7 +15,9 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.example.sihua.wisdomnews.Constants.Constants;
 import com.example.sihua.wisdomnews.R;
+import com.example.sihua.wisdomnews.utils.SharedPreferenceUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.Timer;
@@ -31,7 +29,6 @@ public class SplashActivity extends Activity {
     private Button btn_start;
     @ViewInject(R.id.rl_root)
     private RelativeLayout rl_root;
-
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -97,7 +94,13 @@ public class SplashActivity extends Activity {
     }
 
     private void enterHome() {
-        startActivity(new Intent(this,GuideActivity.class));
-        finish();
+        if(!SharedPreferenceUtils.getSharedPreferenceBoolean(this, Constants.boolInfo,false)) {
+            startActivity(new Intent(this, GuideActivity.class));
+            finish();
+        }else{
+            //enter to Home Page
+            startActivity(new Intent(this,HomeActivity.class));
+            finish();
+        }
     }
 }
