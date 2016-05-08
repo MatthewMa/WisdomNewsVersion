@@ -69,7 +69,7 @@ public class NewsCenterPager extends BasePager {
         leftMenuFragment.setMenuData(news);
         //准备4个菜单详情页
         menulist=new ArrayList<BaseMenuDetailPage>();
-        menulist.add(new NewsMenuDetailPage(mActivity));
+        menulist.add(new NewsMenuDetailPage(mActivity,news.getData().get(0).getChildren()));
         menulist.add(new TopicMenuDetailPage(mActivity));
         menulist.add(new PicturesMenuDetailPage(mActivity));
         menulist.add(new InteractionMenuDetailPage(mActivity));
@@ -84,6 +84,7 @@ public class NewsCenterPager extends BasePager {
         fl_content.removeAllViews();
         fl_content.addView(detailPage.mRootView);//将布局文件设置给framelayout
         tv_title.setText(news.getData().get(position).getTitle());//设置当前页的标题
+        detailPage.initData();//初始化当前页面的数据
     }
 
 

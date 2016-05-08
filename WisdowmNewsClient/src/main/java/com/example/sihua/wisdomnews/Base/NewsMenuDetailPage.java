@@ -9,7 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.sihua.wisdomnews.Bean.NewsData;
 import com.example.sihua.wisdomnews.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 新闻菜单详情页
@@ -17,8 +21,15 @@ import com.example.sihua.wisdomnews.R;
 public class NewsMenuDetailPage extends BaseMenuDetailPage {
 
     private ViewPager vp_content;
+    private List<NewsData.NewsMenuData.NewsTabData> children;
     public NewsMenuDetailPage(Activity activity) {
         super(activity);
+    }
+    private ArrayList<TabDetail> myPagerList;
+
+    public NewsMenuDetailPage(Activity mActivity, List<NewsData.NewsMenuData.NewsTabData> children) {
+        super(mActivity);
+        this.children=children;
     }
 
     @Override
@@ -28,31 +39,40 @@ public class NewsMenuDetailPage extends BaseMenuDetailPage {
         return view;
     }
 
+    //初始化页签数据
     @Override
     public void initData() {
-
+        myPagerList=new ArrayList<TabDetail>();
+        for (int i = 0; i < children.size(); i++) {
+            TabDetail td=new TabDetail(mActivity,children.get(i));
+            myPagerList.add(td);
+        }
+        vp_content.setAdapter(new MenuDetailAdapter());
     }
 
     class MenuDetailAdapter extends PagerAdapter{
 
         @Override
         public int getCount() {
-            return 0;
+            return myPagerList.size();
         }
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return false;
+            return view==object;
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            return super.instantiateItem(container, position);
+            TabDetail currentPager=myPagerList.get(position);
+            container.addView(currentPager.mRootView);
+            currentPager.initData();
+            return currentPager.mRootView;
         }
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            super.destroyItem(container, position, object);
+            container.removeView((View) object);
         }
     }
 }
