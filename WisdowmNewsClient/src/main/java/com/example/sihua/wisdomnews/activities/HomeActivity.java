@@ -43,9 +43,20 @@ public class HomeActivity extends SlidingFragmentActivity {
     private void initFragment() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fl_menu,new LeftMenuFragment(), FRAGMENT_LEFT_MENU);
-        transaction.replace(R.id.fl_content,new ContentFragment(),FRAGMENT_CONTENT);
+        transaction.replace(R.id.fl_menu, new LeftMenuFragment(), FRAGMENT_LEFT_MENU);
+        transaction.replace(R.id.fl_content, new ContentFragment(), FRAGMENT_CONTENT);
         transaction.commit();
 
+    }
+    public LeftMenuFragment getLeftMenuFragment(){
+        FragmentManager manager=getSupportFragmentManager();
+        LeftMenuFragment leftMenuFragment= (LeftMenuFragment) manager.findFragmentByTag(FRAGMENT_LEFT_MENU);
+        return leftMenuFragment;
+    }
+
+    public ContentFragment getContentFragment(){
+        FragmentManager manager=getSupportFragmentManager();
+        ContentFragment contentFragment= (ContentFragment) manager.findFragmentByTag(FRAGMENT_CONTENT);
+        return contentFragment;
     }
 }
