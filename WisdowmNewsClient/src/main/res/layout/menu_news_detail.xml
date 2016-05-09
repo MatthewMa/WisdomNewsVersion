@@ -3,9 +3,30 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <android.support.v4.view.ViewPager
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <com.viewpagerindicator.TabPageIndicator
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/tp_title">
+    </com.viewpagerindicator.TabPageIndicator>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/news_cate_arr"
+            android:id="@+id/ib_next"
+            android:padding="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"/>
+    </LinearLayout>
+    <com.example.sihua.wisdomnews.CustomedView.HorizontalViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/vp_content"></android.support.v4.view.ViewPager>
+        android:id="@+id/vp_content">
+
+    </com.example.sihua.wisdomnews.CustomedView.HorizontalViewPager>
 
 </LinearLayout>
