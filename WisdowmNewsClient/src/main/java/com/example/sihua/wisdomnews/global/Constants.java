@@ -5,6 +5,8 @@ package com.example.sihua.wisdomnews.global;
  */
 public class Constants {
 
-    public static final String SERVER_URL="http://10.227.140.37:8080/zhbj";
+    public static final String SERVER_URL="http://192.168.0.12:8080/zhbj";
     public static final String CATEGORY_URL=SERVER_URL+"/categories.json";//获取分类信息
+    public static final String boolInfo="firstentry";
+    public static final String SERVER_ADDRESS="192.168.0.12";
 }

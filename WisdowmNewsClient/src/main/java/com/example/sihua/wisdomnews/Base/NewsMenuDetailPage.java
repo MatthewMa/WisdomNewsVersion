@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.example.sihua.wisdomnews.Bean.NewsData;
 import com.example.sihua.wisdomnews.CustomedView.HorizontalViewPager;
 import com.example.sihua.wisdomnews.R;
+import com.example.sihua.wisdomnews.activities.HomeActivity;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ import java.util.List;
  */
 public class NewsMenuDetailPage extends BaseMenuDetailPage {
 
-    private HorizontalViewPager vp_content;
+    private ViewPager vp_content;
     private List<NewsData.NewsMenuData.NewsTabData> children;
     public NewsMenuDetailPage(Activity activity) {
         super(activity);
@@ -39,7 +41,7 @@ public class NewsMenuDetailPage extends BaseMenuDetailPage {
     @Override
     public View initView() {
         View view = View.inflate(mActivity, R.layout.menu_news_detail, null);
-        vp_content= (HorizontalViewPager) view.findViewById(R.id.vp_content);
+        vp_content= (ViewPager) view.findViewById(R.id.vp_content);
         //初始化自定义控件
         tp_title= (TabPageIndicator) view.findViewById(R.id.tp_title);
         ib_next= (ImageButton) view.findViewById(R.id.ib_next);
@@ -50,6 +52,31 @@ public class NewsMenuDetailPage extends BaseMenuDetailPage {
                 int currentItem = vp_content.getCurrentItem();
                 currentItem++;
                 vp_content.setCurrentItem(currentItem);
+            }
+        });
+        //当VIEWPAGER和INDICATOR绑定时需要设置滑动监听，给INDICATOR设置
+        tp_title.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                HomeActivity home= (HomeActivity) NewsMenuDetailPage.this.mActivity;
+                SlidingMenu slidingMenu = home.getSlidingMenu();
+                //判断是第几个页面
+                if(position==0){
+                    //只有在北京侧边栏才允许出来
+                    slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+                }else{
+                    slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
         return view;

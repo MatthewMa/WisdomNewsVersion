@@ -15,8 +15,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.example.sihua.wisdomnews.Constants.Constants;
 import com.example.sihua.wisdomnews.R;
+import com.example.sihua.wisdomnews.global.Constants;
 import com.example.sihua.wisdomnews.utils.SharedPreferenceUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
